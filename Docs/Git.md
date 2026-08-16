@@ -637,7 +637,7 @@ git add .
 git commit -m "message"
 git log --oneline
 git remote -v
-git remote add origin URL
+git remote add origin https://github.com/ThienNguyen62/boarding-house.git
 git branch
 git switch main
 git switch -c branch-name
