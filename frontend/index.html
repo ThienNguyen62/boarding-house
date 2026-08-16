@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>TrọSmart — Tìm trọ thông minh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body data-page="home">
+    <header class="nav"><a class="brand" href="index.html"><b>T</b>Trọ<span>Smart</span></a>
+        <div class="search"><i>⌕</i><input id="search" placeholder="Tìm theo quận, trường, tiện ích..."></div>
+        <nav><a href="pages/map.html">◉ Bản đồ</a><button id="saved">♡</button><button id="notice">♢<em></em></button><a
+                class="btn primary" href="pages/login.html">Đăng nhập</a></nav>
+    </header>
+    <section class="hero">
+    <!-- Ánh sáng chuyển động -->
+    <div class="hero-glow glow-1"></div>
+    <div class="hero-glow glow-2"></div>
+
+    <div class="hero-inner">
+
+        <div class="hero-eyebrow">
+            <span class="eyebrow-dot"></span>
+            NỀN TẢNG TÌM TRỌ THÔNG MINH
+        </div>
+
+        <h1>
+            Tìm nơi ở phù hợp
+            <br>
+            <span>theo cách của bạn.</span>
+        </h1>
+
+        <p class="hero-description">
+            Lọc theo giá, vị trí, tiện ích và nhu cầu thực tế.
+            Dữ liệu rõ ràng, chủ trọ xác thực.
+        </p>
+
+        <div class="hero-search">
+            <span class="search-icon">⌕</span>
+
+            <input
+                id="heroSearch"
+                placeholder="Ví dụ: gần Bách Khoa, dưới 4 triệu..."
+                autocomplete="off"
+            >
+
+            <button class="btn dark" id="find">
+                Tìm trọ
+                <span class="search-arrow">→</span>
+            </button>
+        </div>
+
+        <div class="stats">
+
+            <div class="stat-item">
+                <b>
+                    <span class="counter" data-target="1200">0</span>+
+                </b>
+                <small>phòng đang đăng</small>
+            </div>
+
+            <div class="stat-item">
+                <b>
+                    <span class="counter" data-target="350">0</span>+
+                </b>
+                <small>chủ trọ xác thực</small>
+            </div>
+
+            <div class="stat-item">
+                <b>
+                    <span class="counter" data-target="4.8" data-decimal="true">0</span>/5
+                </b>
+                <small>đánh giá trung bình</small>
+            </div>
+
+        </div>
+
+        <button class="hero-scroll" id="heroScroll">
+            <span>Khám phá phòng trọ</span>
+            <i>↓</i>
+        </button>
+
+    </div>
+</section>
+    <main>
+        <section class="section" id="listings">
+            <div class="heading">
+                <div><small>KHÁM PHÁ</small>
+                    <h2>Tìm căn phòng phù hợp</h2>
+                </div><a href="pages/map.html">Xem bản đồ →</a>
+            </div>
+            <div class="filters"><label>Khu vực<select id="district"><option value="">Tất cả</option></select></label><label>Giá tối đa<select id="price"><option value="">Không giới hạn</option></select></label><label>Loại phòng<select id="type"><option value="">Tất cả</option></select></label><label>Diện tích<select id="area"><option value="">Tất cả</option></select></label><button id="reset">Đặt lại</button></div>
+            <div class="meta"><span id="count">10 phòng</span><span>✓ Ưu tiên tin đã xác thực</span></div>
+            <div class="grid" id="rooms"></div><div class="load-more-wrap" id="loadMoreWrap" hidden><button class="btn outline load-more" id="loadMore">Xem thêm phòng →</button></div>
+        </section>
+        <section class="section map-band">
+            <div><small>TRỌSMART MAP</small>
+                <h2>Nhìn toàn bộ lựa chọn trên bản đồ.</h2>
+                <p>So sánh vị trí, khoảng cách tới trường học và tiện ích xung quanh trước khi quyết định.</p><a
+                    class="btn dark" href="pages/map.html">Mở bản đồ</a>
+            </div>
+            <div class="fake-map"><span>HÀ NỘI</span><b style="left:25%;top:35%">1</b><b
+                    style="left:55%;top:58%">2</b><b style="left:72%;top:27%">3</b><b style="left:43%;top:72%">4</b>
+            </div>
+        </section>
+        <section class="section">
+            <div class="heading">
+                <div><small>CỘNG ĐỒNG</small>
+                    <h2>Chủ trọ uy tín</h2>
+                </div><span>Được đánh giá từ người thuê</span>
+            </div>
+            <div class="landlords" id="landlords"></div>
+        </section>
+        <section class="section cta">
+            <div><small>DÀNH CHO CHỦ TRỌ</small>
+                <h2>Đăng phòng. Tiếp cận đúng người thuê.</h2>
+                <p>Quản lý tin đăng và nhận yêu cầu thuê trên một nền tảng.</p>
+            </div><a class="btn primary" href="pages/login.html?role=landlord">Tôi là chủ trọ →</a>
+        </section>
+    </main>
+    <footer>
+        <div><a class="brand" href="index.html"><b>T</b>Trọ<span>Smart</span></a>
+            <p>Tìm trọ minh bạch. Sống đúng nơi.</p>
+        </div>
+        <div><strong>Sản phẩm</strong><a href="#listings">Tìm phòng</a><a href="pages/map.html">Bản đồ</a></div>
+        <div><strong>Hỗ trợ</strong><a href="#">Trung tâm trợ giúp</a><a href="#">Điều khoản</a></div>
+        <div><strong>Liên hệ</strong><span>hello@trosmart.vn</span><span>Hà Nội, Việt Nam</span></div><small>© 2026
+            TrọSmart MVP. Dữ liệu demo.</small>
+    </footer>
+    <div id="toast"></div>
+    <script src="assets/js/core/api.js"></script>
+    <script src="assets/js/core/session.js"></script>
+    <script src="assets/js/features/filters.js"></script>
+    <script src="assets/js/features/home.js"></script>
+</body>
+
+</html>

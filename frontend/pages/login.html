@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Tài khoản — TrọSmart</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body class="auth">
+  <div class="auth-left">
+    <a class="brand light" href="../index.html"><b>T</b>Trọ<span>Smart</span></a>
+    <div>
+      <small>TÌM TRỌ THÔNG MINH</small>
+      <h1>Một tài khoản.<br>Một nơi ở phù hợp.</h1>
+      <p>Đăng nhập để lưu phòng, liên hệ chủ trọ hoặc quản lý tin đăng của bạn.</p>
+    </div>
+    <i>“Tìm trọ không nên là việc phải mở 20 tab.”</i>
+  </div>
+
+  <div class="auth-right">
+    <div class="auth-box">
+      <small id="step">ĐĂNG NHẬP</small>
+      <div id="roles" class="roles auth-role-picker">
+        <button type="button" data-role="tenant"><b>⌂</b><strong>Người thuê</strong><small>Tìm, lưu và liên hệ phòng trọ</small></button>
+        <button type="button" data-role="landlord"><b>▦</b><strong>Chủ trọ</strong><small>Đăng tin và quản lý người thuê</small></button>
+      </div>
+
+      <div class="auth-heading">
+        <h2 id="modeTitle">Đăng nhập tài khoản</h2>
+        <p id="modeDescription">Nhập tài khoản đã có trong hệ thống để tiếp tục.</p>
+      </div>
+
+      <form id="loginForm">
+        <input type="hidden" id="loginRole" value="tenant">
+        <p class="auth-hint" id="roleHint"></p>
+        <label>Email<input id="loginEmail" type="email" value="tenant@tro.vn" required></label>
+        <label>Mật khẩu<input id="loginPassword" type="password" value="123456" required></label>
+        <button class="btn primary full" type="submit">Đăng nhập</button>
+        <aside>Demo: <b>tenant@tro.vn</b> / <b>123456</b> hoặc <b>landlord@tro.vn</b> / <b>123456</b></aside>
+      </form>
+
+      <form id="registerForm" hidden>
+        <input type="hidden" id="registerRole" value="tenant">
+        <label>Họ và tên<input id="registerName" type="text" placeholder="Nguyễn Văn A" required></label>
+        <label>Email<input id="registerEmail" type="email" placeholder="you@tro.vn" required></label>
+        <label>Mật khẩu<input id="registerPassword" type="password" minlength="4" required></label>
+        <label>Nhập lại mật khẩu<input id="registerPasswordConfirm" type="password" minlength="4" required></label>
+        <button class="btn primary full" type="submit">Tạo tài khoản</button>
+        <aside>Tài khoản mới sẽ được lưu trực tiếp vào <b>backend/data/db.json</b>.</aside>
+      </form>
+
+      <div class="auth-switch"><span id="modeText">Chưa có tài khoản?</span> <button type="button" id="switchMode">Đăng ký tài khoản</button></div>
+    </div>
+  </div>
+
+  <script src="../assets/js/core/api.js"></script>
+  <script src="../assets/js/core/session.js"></script>
+  <script src="../assets/js/features/auth.js"></script>
+</body>
+</html>

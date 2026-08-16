@@ -1,0 +1,42 @@
+[
+  {
+    "id": "CMT001",
+    "room_id": "R011",
+    "user_id": "U001",
+    "user_name": "Nguyễn Minh Anh",
+    "user_role": "tenant",
+    "user_avatar": "assets/images/avatars/default-01.svg",
+    "content": "Phòng có thật và khu vực này khá thuận tiện cho sinh viên Bách Khoa. Mình thích chỗ để xe và giờ giấc tự do.",
+    "created_at": "2026-08-12T10:20:00"
+  },
+  {
+    "id": "CMT002",
+    "room_id": "R011",
+    "user_id": "U002",
+    "user_name": "Trần Hoàng Nam",
+    "user_role": "tenant",
+    "user_avatar": "assets/images/avatars/default-02.svg",
+    "content": "Cho mình hỏi đường vào ngõ buổi tối có sáng và an ninh ổn không ạ?",
+    "created_at": "2026-08-13T19:05:00"
+  },
+  {
+    "id": "CMT003",
+    "room_id": "R021",
+    "user_id": "U001",
+    "user_name": "Nguyễn Minh Anh",
+    "user_role": "tenant",
+    "user_avatar": "assets/images/avatars/default-01.svg",
+    "content": "Giá khá ổn so với diện tích. Mình đang ưu tiên những phòng có ban công như phòng này.",
+    "created_at": "2026-08-14T08:35:00"
+  },
+  {
+    "id": "CMT004",
+    "room_id": "R025",
+    "user_id": "U002",
+    "user_name": "Trần Hoàng Nam",
+    "user_role": "tenant",
+    "user_avatar": "assets/images/avatars/default-02.svg",
+    "content": "Gần Đại học Kinh tế Quốc dân, đi lại khá tiện. Tiện ích trong phòng đúng như mô tả.",
+    "created_at": "2026-08-14T16:42:00"
+  }
+]

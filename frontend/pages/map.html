@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <title>Bản đồ — TrọSmart</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+</head>
+
+<body>
+
+    <!-- =====================================================
+         NAVBAR
+         ===================================================== -->
+
+    <header class="nav">
+
+        <a class="brand" href="../index.html">
+            <b>T</b>Trọ<span>Smart</span>
+        </a>
+
+        <!-- Search trên navbar -->
+        <div class="search map-navbar-search">
+            <i>⌕</i>
+
+            <input
+                id="mapSearchTop"
+                type="text"
+                placeholder="Tìm địa điểm..."
+                autocomplete="off"
+            >
+        </div>
+
+        <nav>
+            <a href="../index.html">
+                Danh sách
+            </a>
+
+            <a
+                class="btn primary"
+                href="login.html"
+            >
+                Đăng nhập
+            </a>
+        </nav>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAP PAGE
+         ===================================================== -->
+
+    <main class="map-page">
+
+        <!-- =================================================
+             SIDEBAR
+             ================================================= -->
+
+        <aside class="map-sidebar">
+
+            <!-- Header -->
+            <div class="map-heading">
+
+                <small>TRỌSMART MAP</small>
+
+                <h2>
+                    Phòng quanh bạn
+                </h2>
+
+                <p class="map-heading-description">
+                    Tìm phòng theo vị trí, giá và nhu cầu của bạn.
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 SEARCH
+                 ================================================= -->
+
+            <div class="map-search-box">
+
+                <span class="map-search-icon">
+                    ⌕
+                </span>
+
+                <input
+                    id="mapSearch"
+                    type="text"
+                    placeholder="Tìm địa điểm, tên phòng..."
+                    autocomplete="off"
+                >
+
+                <button
+                    id="clearMapSearch"
+                    class="map-search-clear"
+                    type="button"
+                    aria-label="Xóa tìm kiếm"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 FILTER HEADER
+                 ================================================= -->
+
+            <div class="map-filter-header">
+
+                <strong>
+                    Bộ lọc
+                </strong>
+
+                <button
+                    id="resetMapFilters"
+                    type="button"
+                >
+                    Xóa tất cả
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 FILTERS
+                 ================================================= -->
+
+            <div class="map-filters">
+
+                <!-- Khu vực -->
+                <div class="map-filter">
+
+                    <label for="mapDistrict">
+                        Khu vực
+                    </label>
+
+                    <select id="mapDistrict"><option value="">Tất cả khu vực</option></select>
+
+                </div>
+
+
+                <!-- Giá -->
+                <div class="map-filter">
+
+                    <label for="mapPrice">
+                        Giá thuê tối đa
+                    </label>
+
+                    <select id="mapPrice"><option value="">Không giới hạn</option></select>
+
+                </div>
+
+
+                <!-- Loại phòng -->
+                <div class="map-filter">
+
+                    <label for="mapType">
+                        Loại phòng
+                    </label>
+
+                    <select id="mapType"><option value="">Tất cả loại phòng</option></select>
+
+                </div>
+
+
+                <!-- Diện tích -->
+                <div class="map-filter">
+
+                    <label for="mapArea">
+                        Diện tích tối thiểu
+                    </label>
+
+                    <select id="mapArea"><option value="">Không giới hạn</option></select>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 RESULT HEADER
+                 ================================================= -->
+
+            <div class="map-result-header">
+
+                <div>
+                    <strong id="mapResultCount">
+                        0 phòng
+                    </strong>
+
+                    <span>
+                        phù hợp
+                    </span>
+                </div>
+
+                <span
+                    id="mapActiveFilter"
+                    class="map-active-filter"
+                >
+                    Tất cả
+                </span>
+
+            </div>
+
+
+            <!-- =================================================
+                 ROOM LIST
+                 ================================================= -->
+
+            <div id="mapList" class="map-list"></div>
+
+        </aside>
+
+
+        <!-- =================================================
+             MAP
+             ================================================= -->
+
+        <section
+            id="canvas"
+            class="map-canvas"
+            aria-label="Bản đồ các phòng trọ"
+        >
+            <div class="map-controls">
+                <button id="mapZoomIn" type="button" title="Phóng to">+</button>
+                <button id="mapZoomOut" type="button" title="Thu nhỏ">−</button>
+            </div>
+
+            <div id="mapEmpty" class="map-empty" hidden>
+                <div class="map-empty-icon">⌕</div>
+                <strong>Không tìm thấy phòng</strong>
+                <span>Hãy thử thay đổi bộ lọc hoặc khu vực.</span>
+                <button id="mapEmptyReset" type="button">Xóa bộ lọc</button>
+            </div>
+        </section>
+
+    </main>
+
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="../assets/js/core/api.js"></script>
+    <script src="../assets/js/features/filters.js"></script>
+    <script src="../assets/js/features/map.js"></script>
+
+</body>
+
+</html>

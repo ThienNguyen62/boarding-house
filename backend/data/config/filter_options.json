@@ -1,0 +1,146 @@
+{
+  "districts": [
+    {
+      "label": "Tất cả",
+      "value": ""
+    },
+    {
+      "label": "Hai Bà Trưng",
+      "value": "Hai Bà Trưng"
+    },
+    {
+      "label": "Cầu Giấy",
+      "value": "Cầu Giấy"
+    },
+    {
+      "label": "Nam Từ Liêm",
+      "value": "Nam Từ Liêm"
+    },
+    {
+      "label": "Thanh Xuân",
+      "value": "Thanh Xuân"
+    },
+    {
+      "label": "Tây Hồ",
+      "value": "Tây Hồ"
+    },
+    {
+      "label": "Đống Đa",
+      "value": "Đống Đa"
+    },
+    {
+      "label": "Ba Đình",
+      "value": "Ba Đình"
+    }
+  ],
+  "prices": [
+    {
+      "label": "Không giới hạn",
+      "value": ""
+    },
+    {
+      "label": "3 triệu",
+      "value": "3000000"
+    },
+    {
+      "label": "4 triệu",
+      "value": "4000000"
+    },
+    {
+      "label": "5 triệu",
+      "value": "5000000"
+    },
+    {
+      "label": "7 triệu",
+      "value": "7000000"
+    }
+  ],
+  "types": [
+    {
+      "label": "Tất cả",
+      "value": ""
+    },
+    {
+      "label": "Phòng trọ",
+      "value": "Phòng trọ"
+    },
+    {
+      "label": "Studio",
+      "value": "Studio"
+    },
+    {
+      "label": "Căn hộ mini",
+      "value": "Căn hộ mini"
+    },
+    {
+      "label": "Căn hộ 1PN",
+      "value": "Căn hộ 1PN"
+    }
+  ],
+  "areas": [
+    {
+      "label": "Tất cả",
+      "value": ""
+    },
+    {
+      "label": "Từ 20m²",
+      "value": "20"
+    },
+    {
+      "label": "Từ 25m²",
+      "value": "25"
+    },
+    {
+      "label": "Từ 30m²",
+      "value": "30"
+    }
+  ],
+  "map_prices": [
+    {
+      "label": "Không giới hạn",
+      "value": ""
+    },
+    {
+      "label": "Dưới 3 triệu",
+      "value": "3000000"
+    },
+    {
+      "label": "Dưới 4 triệu",
+      "value": "4000000"
+    },
+    {
+      "label": "Dưới 5 triệu",
+      "value": "5000000"
+    },
+    {
+      "label": "Dưới 7 triệu",
+      "value": "7000000"
+    },
+    {
+      "label": "Dưới 10 triệu",
+      "value": "10000000"
+    }
+  ],
+  "map_areas": [
+    {
+      "label": "Không giới hạn",
+      "value": ""
+    },
+    {
+      "label": "Từ 18m²",
+      "value": "18"
+    },
+    {
+      "label": "Từ 25m²",
+      "value": "25"
+    },
+    {
+      "label": "Từ 30m²",
+      "value": "30"
+    },
+    {
+      "label": "Từ 40m²",
+      "value": "40"
+    }
+  ]
+}

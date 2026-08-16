@@ -1,0 +1,34 @@
+[
+  {
+    "id": "U001",
+    "email": "tenant@tro.vn",
+    "name": "Nguyễn Minh Anh",
+    "role": "tenant",
+    "avatar": "assets/images/avatars/default-01.svg",
+    "password_hash": "e012861607c0a4447455eda18ee0c690d3517d31f7d6819e53d44b590a280c99"
+  },
+  {
+    "id": "U002",
+    "email": "tenant2@tro.vn",
+    "name": "Trần Hoàng Nam",
+    "role": "tenant",
+    "avatar": "assets/images/avatars/default-02.svg",
+    "password_hash": "e012861607c0a4447455eda18ee0c690d3517d31f7d6819e53d44b590a280c99"
+  },
+  {
+    "id": "U003",
+    "email": "landlord@tro.vn",
+    "name": "Lê Thu Hà",
+    "role": "landlord",
+    "avatar": "assets/images/avatars/default-03.svg",
+    "password_hash": "e012861607c0a4447455eda18ee0c690d3517d31f7d6819e53d44b590a280c99"
+  },
+  {
+    "id": "U004",
+    "email": "landlord2@tro.vn",
+    "name": "Phạm Đức Long",
+    "role": "landlord",
+    "avatar": "assets/images/avatars/default-04.svg",
+    "password_hash": "e012861607c0a4447455eda18ee0c690d3517d31f7d6819e53d44b590a280c99"
+  }
+]
