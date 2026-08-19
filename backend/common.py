@@ -17,7 +17,14 @@ def hash_pw(password):
 
 
 def public_user(user):
-    return {k: user.get(k, "") for k in ["id", "email", "name", "role", "avatar"]}
+    if not user:
+        return None
+    db = load_db()
+    verified = bool(user.get("verified", False))
+    if not verified:
+        # Đồng bộ với hồ sơ chủ trọ trong dữ liệu seed cũ nếu có liên kết user_id.
+        verified = any(l.get("user_id") == user.get("id") and l.get("verified") for l in db.get("landlords", []))
+    return {**{k: user.get(k, "") for k in ["id", "email", "name", "role", "avatar"]}, "verified": verified}
 
 
 def current_user():
@@ -64,9 +71,21 @@ def active_room(db, room_id):
 
 def enrich_room(room, db):
     result = dict(room)
-    landlord = next((l for l in db.get("landlords", []) if l.get("id") == room.get("landlord_id")), {})
+    landlord = dict(next((l for l in db.get("landlords", []) if l.get("id") == room.get("landlord_id")), {}) or {})
+    if landlord.get("user_id"):
+        owner = next((u for u in db.get("users", []) if u.get("id") == landlord.get("user_id")), None)
+        if owner is not None:
+            landlord["verified"] = bool(owner.get("verified", False))
     result["landlord"] = landlord
     result["comments_count"] = sum(1 for c in db.get("comments", []) if c.get("room_id") == room.get("id"))
+    result["listing_verification"] = {
+        "verified": bool(room.get("verified", False)),
+        "verified_at": room.get("verified_at"),
+        "note": room.get("verification_note", ""),
+    }
+    result.pop("verification_contact", None)
+    result.pop("verification_note", None)
+    result.pop("verified_at", None)
     result.pop("owner_user_id", None)
     return result
 

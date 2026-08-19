@@ -16,6 +16,7 @@
     >
 
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="icon" type="image/png" href="../assets/images/trosmart-logo-phase11.png">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
 </head>
 
@@ -28,7 +29,7 @@
     <header class="nav">
 
         <a class="brand" href="../index.html">
-            <b>T</b>Trọ<span>Smart</span>
+            <img class="brand-logo" src="../assets/images/trosmart-logo-phase11.png" alt="TrọSmart">
         </a>
 
         <!-- Search trên navbar -->
@@ -116,82 +117,21 @@
             </div>
 
 
-            <!-- =================================================
-                 FILTER HEADER
-                 ================================================= -->
-
-            <div class="map-filter-header">
-
-                <strong>
-                    Bộ lọc
-                </strong>
-
-                <button
-                    id="resetMapFilters"
-                    type="button"
-                >
-                    Xóa tất cả
-                </button>
-
+            <div class="map-filter-shell">
+                <button type="button" class="map-filter-arrow" id="mapFilterPrev" aria-label="Cuộn bộ lọc sang trái">&lt;</button>
+                <div class="map-filter-viewport" id="mapFilterViewport">
+                    <div class="compact-filter-bar map-compact-filter-bar" id="compactFilterBar">
+                        <button type="button" class="compact-filter-btn filter-main" id="advancedFilterButton">Lọc</button>
+                        <label class="compact-verified-toggle"><span class="verified-filter-icon">✓</span><span>Tin xác thực</span><input id="filterVerified" type="checkbox"><span class="toggle-ui"></span></label>
+                        <select id="filterDistrict" class="compact-filter-select" aria-label="Quận"><option value="">Tất cả quận</option></select>
+                        <select id="filterWard" class="compact-filter-select" aria-label="Phường/khu vực"><option value="">Tất cả phường/khu vực</option></select>
+                        <button type="button" id="filterPriceRange" class="compact-filter-price" aria-label="Khoảng giá"><span>Khoảng giá</span><b>⌄</b></button>
+                        <button type="button" id="filterNearby" class="compact-filter-nearby" aria-label="Tìm kiếm quanh bạn"><span class="nearby-filter-icon">⌖</span><span>Tìm kiếm quanh bạn</span><b>⌄</b></button>
+                        <button type="button" class="compact-reset-btn" id="compactFilterReset">Đặt lại</button>
+                    </div>
+                </div>
+                <button type="button" class="map-filter-arrow" id="mapFilterNext" aria-label="Cuộn bộ lọc sang phải">&gt;</button>
             </div>
-
-
-            <!-- =================================================
-                 FILTERS
-                 ================================================= -->
-
-            <div class="map-filters">
-
-                <!-- Khu vực -->
-                <div class="map-filter">
-
-                    <label for="mapDistrict">
-                        Khu vực
-                    </label>
-
-                    <select id="mapDistrict"><option value="">Tất cả khu vực</option></select>
-
-                </div>
-
-
-                <!-- Giá -->
-                <div class="map-filter">
-
-                    <label for="mapPrice">
-                        Giá thuê tối đa
-                    </label>
-
-                    <select id="mapPrice"><option value="">Không giới hạn</option></select>
-
-                </div>
-
-
-                <!-- Loại phòng -->
-                <div class="map-filter">
-
-                    <label for="mapType">
-                        Loại phòng
-                    </label>
-
-                    <select id="mapType"><option value="">Tất cả loại phòng</option></select>
-
-                </div>
-
-
-                <!-- Diện tích -->
-                <div class="map-filter">
-
-                    <label for="mapArea">
-                        Diện tích tối thiểu
-                    </label>
-
-                    <select id="mapArea"><option value="">Không giới hạn</option></select>
-
-                </div>
-
-            </div>
-
-
             <!-- =================================================
                  RESULT HEADER
                  ================================================= -->

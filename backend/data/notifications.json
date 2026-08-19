@@ -1,1 +1,13 @@
-[]
+[
+  {
+    "id": "NTF001",
+    "user_id": "U003",
+    "type": "room_comment",
+    "room_id": "R011",
+    "comment_id": "CMT005",
+    "title": "Có bình luận mới",
+    "message": "Nguyễn Minh Anh vừa bình luận về “Phòng khép kín 22m² gần Bách Khoa\".",
+    "read": false,
+    "created_at": "2026-08-16T12:19:34"
+  }
+]

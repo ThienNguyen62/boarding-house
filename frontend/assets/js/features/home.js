@@ -23,7 +23,7 @@
       const badge = button.querySelector('em'); if (badge) { badge.textContent = unread > 9 ? '9+' : unread; badge.hidden = unread === 0; }
       menu.innerHTML = `<div class="notice-menu-head"><strong>Thông báo</strong>${unread ? '<button id="readAllNotices">Đánh dấu đã đọc</button>' : ''}</div>${items.length ? items.slice(0,8).map((item) => `<button class="notice-item ${item.read ? '' : 'unread'}" data-notice-id="${escapeHtml(item.id)}"><span class="notice-dot"></span><span><b>${escapeHtml(item.title || 'Thông báo')}</b><small>${escapeHtml(item.message || '')}</small><i>${formatNoticeTime(item.created_at)}</i></span></button>`).join('') : '<div class="notice-empty">Chưa có thông báo mới.</div>'}`;
       menu.querySelector('#readAllNotices')?.addEventListener('click', async () => { await API.put('/api/notifications/read-all'); await loadNotifications(); });
-      menu.querySelectorAll('.notice-item').forEach((item) => item.addEventListener('click', async () => { const noticeId = item.dataset.noticeId; await API.put(`/api/notifications/${encodeURIComponent(noticeId)}/read`); menu.hidden = true; await loadNotifications(); }));
+      menu.querySelectorAll('.notice-item').forEach((item) => item.addEventListener('click', async () => { const noticeId = item.dataset.noticeId; const title = item.querySelector('b')?.textContent || 'Thông báo'; try { await API.put(`/api/notifications/${encodeURIComponent(noticeId)}/read`); } finally { menu.hidden = true; await loadNotifications(); toast(title); } }));
     } catch (error) { console.warn('notification', error); }
   };
 
@@ -79,7 +79,7 @@
       <a href="${page('pages/dashboard.html?view=listings')}">▦ <span>Quản lí phòng trọ</span></a>
       <a href="${page('pages/dashboard.html?view=requests')}">♙ <span>Quản lí khách thuê</span></a>
       <a href="#" data-menu-placeholder="Quản lý hóa đơn">▤ <span>Quản lý hóa đơn</span></a>
-      <a href="#" data-menu-placeholder="Xác thực chính chủ">✓ <span>Xác thực chính chủ</span></a>
+      <a href="${page('pages/dashboard.html?view=profile')}">✓ <span>Xác thực tài khoản</span></a>
       <a href="#" data-menu-placeholder="Báo cáo sự cố">⚠ <span>Báo cáo sự cố</span></a>
       <a href="${page('pages/dashboard.html?view=listings&action=create')}">＋ <span>Tạo bài đăng</span></a>
       <div class="profile-menu-divider"></div>
@@ -120,8 +120,9 @@
       nav.innerHTML = `
         <a href="${page('pages/map.html')}">◉ Bản đồ</a>
         <button id="saved" aria-label="Tin đã lưu">♡</button>
-        <button id="notice" aria-label="Thông báo">♢<em></em></button>
+        <div id="noticeWrap" class="notice-wrap"><button id="notice" class="notice-button notice-button-text" aria-label="Thông báo"><span class="notice-icon" aria-hidden="true">🔔</span><span>Thông báo</span><em hidden></em></button><div id="noticeMenu" class="notice-menu" hidden></div></div>
         <a class="btn primary" href="${page('pages/login.html')}">Đăng nhập</a>`;
+      $('#notice')?.addEventListener('click', () => { location.href = page('pages/login.html'); });
       return;
     }
 
@@ -129,7 +130,7 @@
     nav.innerHTML = `
       <a href="${page('pages/map.html')}">◉ Bản đồ</a>
       <div id="noticeWrap" class="notice-wrap">
-        <button id="notice" class="notice-button" aria-label="Thông báo">⌁<em></em></button>
+        <button id="notice" class="notice-button notice-button-text" aria-label="Thông báo"><span class="notice-icon" aria-hidden="true">🔔</span><span>Thông báo</span><em></em></button>
         <div id="noticeMenu" class="notice-menu" hidden></div>
       </div>
       <div class="profile-menu">
@@ -183,7 +184,7 @@
       return `
         <article class="card">
           <div class="photo" style="background-image:url('${room.image || ''}')">
-            <span class="verified">${room.verified ? '✓ Đã xác thực' : 'Tin mới'}</span>
+            <span class="verified ${room.verified ? 'listing-verified' : 'listing-unverified'}">${room.verified ? '✓ Tin đăng đã xác thực' : 'Chưa xác thực'}</span>
             <button class="save ${isSaved ? 'saved' : ''}" data-id="${room.id}" title="${isSaved ? 'Bỏ lưu' : 'Lưu tin'}">${isSaved ? '♥' : '♡'}</button>
           </div>
           <div class="body">
@@ -261,6 +262,7 @@
 
   const init = async () => {
     await RoomFilters.loadOptions();
+    RoomFilters.initCompactFilterBar();
     await updateNav();
     if (document.body.dataset.userHome === 'true' && !user) {
       location.href = '/';
@@ -277,7 +279,7 @@
       $('#landlords').innerHTML = landlords.map((landlord) => `
         <div class="landlord">
           <img src="${landlord.avatar || ''}" alt="">
-          <h3>${landlord.name} ✓</h3>
+          <h3>${landlord.name}${landlord.verified ? ' <em class="verified-user-badge">✓ Đã xác thực</em>' : ''}</h3>
           <p>★ ${landlord.rating || 0} · ${landlord.reviews || 0} đánh giá</p>
           <small>${landlord.rooms || 0} tin · phản hồi ${landlord.response_rate || 0}%</small>
         </div>`).join('');
@@ -292,7 +294,7 @@
         applyFilters();
       });
     });
-    ['district', 'price', 'type', 'area'].forEach((id) => document.getElementById(id)?.addEventListener('change', applyFilters));
+    window.addEventListener('trosmart:filters-changed', applyFilters);
     $('#find')?.addEventListener('click', () => {
       $('#search').value = $('#heroSearch').value;
       $('#listings')?.scrollIntoView({ behavior: 'smooth' });
@@ -309,10 +311,6 @@
       }
       if (user.role === 'tenant') location.href = page('pages/dashboard.html?view=saved');
       else toast('Tin đã lưu dành cho người thuê.');
-    });
-    $('#notice')?.addEventListener('click', () => {
-      if (!user) return toast('Đăng nhập để xem yêu cầu của bạn.');
-      location.href = page('pages/dashboard.html?view=requests');
     });
     $('#heroScroll')?.addEventListener('click', () => $('#listings')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
     document.querySelectorAll('.hero-chip').forEach((chip) => chip.addEventListener('click', () => { $('#heroSearch').value = chip.dataset.query || ''; $('#search').value = chip.dataset.query || ''; $('#listings')?.scrollIntoView({ behavior:'smooth', block:'start' }); applyFilters(); }));

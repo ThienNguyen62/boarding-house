@@ -65,7 +65,7 @@
       <div class="detail-top">
         <div class="detail-img" style="background-image:url('${escapeHtml(room.image || '')}')"></div>
         <div class="summary">
-          <small>✓ ${room.verified ? 'ĐÃ XÁC THỰC' : 'TIN ĐĂNG'}</small>
+          <small>${room.verified ? '✓ TIN ĐĂNG ĐÃ XÁC THỰC' : 'TIN ĐĂNG CHƯA XÁC THỰC'}</small>
           <h1>${escapeHtml(room.title)}</h1>
           <div>${room.area}m² · ${escapeHtml(room.type)} · ★ ${room.rating || 0}</div>
           <div class="bigprice">${money(room.price)} <small>/ tháng</small></div>
@@ -73,6 +73,7 @@
           <div class="tags">${(room.amenities || []).map((x) => `<span class="tag">${escapeHtml(x)}</span>`).join('')}</div>
           <button class="btn primary" style="width:100%;margin-top:20px" id="contact">Liên hệ chủ trọ</button>
           <button class="btn outline" style="width:100%;margin-top:8px" id="save">${saved ? '♥ Đã lưu' : '♡ Lưu tin'}</button>
+          <div class="room-listing-verification ${room.verified ? 'is-verified' : 'is-unverified'}"><span class="room-verification-icon">${room.verified ? '✓' : '!'}</span><div><strong>${room.verified ? 'TIN ĐĂNG ĐÃ XÁC THỰC' : 'TIN ĐĂNG CHƯA XÁC THỰC'}</strong><p>${room.verified ? 'Tin đăng đã được TrọSmart duyệt ngay trong quy trình MVP.' : 'Tin đăng chưa được chủ trọ xác minh.'}</p></div></div>
         </div>
       </div>
       <div id="contactPanel" class="box" style="display:none;margin-top:18px"><h3>Gửi yêu cầu cho chủ trọ</h3><p style="color:#667085;font-size:11px">Chủ trọ sẽ nhìn thấy yêu cầu trong mục “Yêu cầu thuê”.</p><textarea id="requestMessage" rows="4" style="width:100%;padding:12px;border:1px solid #e4e7ec;border-radius:10px;resize:vertical" placeholder="Ví dụ: Tôi muốn xem phòng vào chiều thứ Bảy."></textarea><button class="btn primary" id="sendRequest" style="margin-top:10px">Gửi yêu cầu</button></div>
@@ -82,7 +83,7 @@
           <div class="box"><h3>Tiện ích</h3><div class="amenities">${(room.amenities || []).map((x) => `<div class="amenity">✓ ${escapeHtml(x)}</div>`).join('')}</div></div>
           <div class="box"><h3>Xung quanh</h3><div class="amenities">${(room.nearby || []).map((x) => `<div class="amenity">⌖ ${escapeHtml(x)}</div>`).join('')}</div></div>
         </div>
-        <aside><div class="box"><h3>Chủ trọ</h3><div class="landlord-profile"><img src="${escapeHtml(landlord.avatar || '')}" alt=""><div><strong>${escapeHtml(landlord.name || 'Chủ trọ')} ${landlord.verified ? '✓' : ''}</strong><small>★ ${landlord.rating || 0} · ${landlord.reviews || 0} đánh giá</small></div></div><p>Phản hồi ${landlord.response_rate || '—'}% · ${escapeHtml(landlord.response_time || '—')}</p></div><div class="box"><h3>Thông tin phòng</h3><div class="amenities"><div class="amenity">Giới tính: <b>${escapeHtml(room.gender || '—')}</b></div><div class="amenity">Nội thất: <b>${room.furnished ? 'Có' : 'Cơ bản'}</b></div><div class="amenity">Nhận phòng: <b>${escapeHtml(room.available_from || '—')}</b></div><div class="amenity">Lượt xem: <b>${room.views || 0}</b></div></div></div></aside>
+        <aside><div class="box landlord-box"><h3>Chủ trọ</h3><div class="landlord-profile"><img src="${escapeHtml(landlord.avatar || '')}" alt=""><div><strong>${escapeHtml(landlord.name || 'Chủ trọ')}</strong><small>★ ${landlord.rating || 0} · ${landlord.reviews || 0} đánh giá</small></div></div>${landlord.verified ? `<div class="landlord-verified-panel"><span class="landlord-verified-icon">✓</span><div><strong>Chủ trọ đã xác thực</strong><p>Đã xác minh thông tin tài khoản bằng số điện thoại và CCCD.</p></div></div>` : `<div class="landlord-unverified-panel"><span>!</span><div><strong>Tài khoản chưa xác thực</strong><p>Ưu tiên tham khảo các tin có nhãn đã xác thực.</p></div></div>`}<p>Phản hồi ${landlord.response_rate || '—'}% · ${escapeHtml(landlord.response_time || '—')}</p></div><div class="box"><h3>Thông tin phòng</h3><div class="amenities"><div class="amenity">Giới tính: <b>${escapeHtml(room.gender || '—')}</b></div><div class="amenity">Nội thất: <b>${room.furnished ? 'Có' : 'Cơ bản'}</b></div><div class="amenity">Nhận phòng: <b>${escapeHtml(room.available_from || '—')}</b></div><div class="amenity">Lượt xem: <b>${room.views || 0}</b></div></div></div></aside>
       </div>
       <section class="comments-section box" id="commentsSection">
         <div class="comments-header"><div><small>CỘNG ĐỒNG</small><h2>Bình luận về phòng <span class="comments-count" id="commentsCount">0</span></h2><p>Tham khảo trải nghiệm và câu hỏi từ những người đã xem tin.</p></div></div>

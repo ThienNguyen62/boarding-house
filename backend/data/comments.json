@@ -38,5 +38,15 @@
     "user_avatar": "assets/images/avatars/default-02.svg",
     "content": "Gần Đại học Kinh tế Quốc dân, đi lại khá tiện. Tiện ích trong phòng đúng như mô tả.",
     "created_at": "2026-08-14T16:42:00"
+  },
+  {
+    "id": "CMT005",
+    "room_id": "R011",
+    "user_id": "U001",
+    "user_name": "Nguyễn Minh Anh",
+    "user_role": "tenant",
+    "user_avatar": "assets/images/avatars/default-01.svg",
+    "content": "hi ae",
+    "created_at": "2026-08-16T12:19:34"
   }
 ]

@@ -228,6 +228,51 @@
     });
   };
 
+  const showVerificationModal = async (roomId) => {
+    let overlay = document.getElementById('roomVerifyModal');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.id = 'roomVerifyModal';
+      overlay.className = 'room-verify-modal';
+      document.body.appendChild(overlay);
+    }
+    const room = (await API.get(`/api/rooms/${encodeURIComponent(roomId)}`)).data;
+    overlay.innerHTML = `
+      <div class="room-verify-dialog" role="dialog" aria-modal="true" aria-labelledby="roomVerifyTitle">
+        <div class="room-verify-head"><div><span class="section-kicker">MVP · DUYỆT NGAY</span><h3 id="roomVerifyTitle">Xác minh tin đăng</h3><p>${escapeHtml(room.title || '')}</p></div><button type="button" class="room-verify-close" id="closeRoomVerify">×</button></div>
+        <form id="roomVerifyForm" class="room-verify-form">
+          <label>Số điện thoại liên hệ *<input name="phone" required inputmode="tel" placeholder="09xxxxxxxx" value=""></label>
+          <label class="field-full">Nội dung xác nhận <textarea name="note" rows="3" maxlength="300" placeholder="Ví dụ: Tôi xác nhận phòng, giá, địa chỉ và ảnh đăng là thông tin hiện tại."></textarea></label>
+          <label class="verify-confirm"><input type="checkbox" name="confirmation" value="confirm" required> Tôi xác nhận thông tin tin đăng là chính xác.</label>
+          <div class="room-verify-actions"><button type="button" class="btn outline" id="cancelRoomVerify">Hủy</button><button type="submit" class="btn primary">Xác minh ngay</button></div>
+        </form>
+      </div>`;
+    overlay.hidden = false;
+    const close = () => { overlay.hidden = true; };
+    $('#closeRoomVerify').addEventListener('click', close);
+    $('#cancelRoomVerify').addEventListener('click', close);
+    overlay.addEventListener('click', (event) => { if (event.target === overlay) close(); }, { once: true });
+    $('#roomVerifyForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const button = event.currentTarget.querySelector('button[type="submit"]');
+      button.disabled = true;
+      const form = new FormData(event.currentTarget);
+      try {
+        await API.post(`/api/rooms/${encodeURIComponent(roomId)}/verify`, {
+          phone: form.get('phone'),
+          note: form.get('note'),
+          confirmation: form.get('confirmation') || ''
+        });
+        close();
+        await renderLandlordListings();
+        toast('Tin đăng đã được xác thực', 'success');
+      } catch (error) {
+        toast(error.message || 'Không thể xác minh tin đăng', 'error');
+        button.disabled = false;
+      }
+    });
+  };
+
   const renderLandlordListings = async () => {
     const rooms = await getRooms('/api/my/rooms?includeHidden=true');
     $('#title').textContent = 'Quản lý tin đăng';
@@ -236,7 +281,8 @@
       <div class="listing-grid">${rooms.map((room) => `
         <article class="listing-card ${room.status === 'hidden' ? 'is-hidden' : ''}">
           <div class="listing-card-image"><img src="${escapeHtml(room.image || '')}" alt=""><span class="listing-status">${room.status === 'hidden' ? 'Đang ẩn' : 'Đang hiển thị'}</span></div>
-          <div class="listing-card-body"><div class="listing-card-title"><h3>${escapeHtml(room.title)}</h3><b>${money(room.price)}</b></div><p>${escapeHtml(room.address || '')}</p><p class="listing-meta">${Number(room.area || 0)}m² · ${escapeHtml(room.type || '')} · ${Number(room.views || 0)} lượt xem</p><div class="listing-tags">${(room.amenities || []).slice(0, 3).map((tag) => `<span>${escapeHtml(tag)}</span>`).join('')}</div>
+          <div class="listing-card-body"><div class="listing-card-title"><h3>${escapeHtml(room.title)}</h3><b>${money(room.price)}</b></div><p>${escapeHtml(room.address || '')}</p><p class="listing-description">${escapeHtml((room.description || 'Chưa có mô tả').slice(0, 150))}${(room.description || '').length > 150 ? '…' : ''}</p><p class="listing-meta">${Number(room.area || 0)}m² · ${escapeHtml(room.type || '')} · ${Number(room.views || 0)} lượt xem</p><div class="listing-tags">${(room.amenities || []).slice(0, 3).map((tag) => `<span>${escapeHtml(tag)}</span>`).join('')}</div>
+            <div class="listing-verification-row ${room.verified ? 'is-verified' : 'is-unverified'}"><div><strong>${room.verified ? '✓ Tin đăng đã xác thực' : 'Chưa xác thực tin đăng'}</strong><small>${room.verified ? 'Đã duyệt theo quy trình MVP.' : 'Xác minh để tin nổi bật và có thể lọc theo trạng thái xác thực.'}</small></div><button class="btn ${room.verified ? 'outline' : 'primary'} verify-listing" data-id="${escapeHtml(room.id)}">${room.verified ? 'Đã xác thực' : 'Xác minh tin đăng'}</button></div>
             <div class="listing-actions"><a class="btn outline" href="room.html?id=${encodeURIComponent(room.id)}">Xem</a><button class="btn outline edit-listing" data-id="${escapeHtml(room.id)}">Sửa</button><button class="btn ${room.status === 'hidden' ? 'primary' : 'outline'} toggle-listing" data-id="${escapeHtml(room.id)}" data-status="${room.status}">${room.status === 'hidden' ? 'Hiển thị lại' : 'Ẩn tin'}</button></div>
           </div>
         </article>`).join('') || '<div class="panel"><p class="empty">Bạn chưa có tin phòng nào. Hãy tạo tin đầu tiên.</p></div>'}</div>`;
@@ -250,6 +296,12 @@
         } catch (error) {
           toast(error.message || 'Không thể tải tin phòng', 'error');
         }
+      });
+    });
+    document.querySelectorAll('.verify-listing').forEach((button) => {
+      button.addEventListener('click', async () => {
+        if (button.textContent.trim() === 'Đã xác thực') return toast('Tin đăng này đã được xác thực.', 'info');
+        try { await showVerificationModal(button.dataset.id); } catch (error) { toast(error.message || 'Không thể mở xác minh tin đăng', 'error'); }
       });
     });
     document.querySelectorAll('.toggle-listing').forEach((button) => {
@@ -291,8 +343,43 @@
         return;
       }
       if (view === 'profile') {
+        const verification = (await API.get('/api/auth/verification')).data || { verified: false };
+        const isVerified = Boolean(verification.verified || user.verified);
         $('#title').textContent = 'Hồ sơ';
-        $('#content').innerHTML = `<div class="panel"><h3>${escapeHtml(user.name)}</h3><p>${escapeHtml(user.email)}</p><p>Vai trò: ${user.role === 'tenant' ? 'Người thuê' : 'Chủ trọ'}</p></div>`;
+        $('#content').innerHTML = `
+          <div class="profile-page-grid">
+            <section class="panel profile-overview">
+              <div class="profile-overview-head"><div class="profile-big-avatar">${escapeHtml((user.name || 'U').trim().split(/\s+/).slice(-1)[0]?.[0] || 'U').toUpperCase()}</div><div><p class="section-kicker">TÀI KHOẢN</p><h2>${escapeHtml(user.name)}</h2><p>${escapeHtml(user.email)}</p><span class="profile-role-badge">${user.role === 'tenant' ? 'Người thuê' : 'Chủ trọ'}</span></div></div>
+              <div class="verification-status ${isVerified ? 'is-verified' : ''}"><div><strong>${isVerified ? '✓ Tài khoản đã xác thực' : 'Tài khoản chưa xác thực'}</strong><p>${isVerified ? 'Thông tin định danh đã được lưu cho tài khoản MVP này.' : 'Xác thực số điện thoại và căn cước công dân để tăng độ tin cậy khi sử dụng TrọSmart.'}</p></div><span>${isVerified ? 'ĐÃ XÁC THỰC' : 'CHƯA XÁC THỰC'}</span></div>
+            </section>
+            <section class="panel verification-panel">
+              <div class="panel-heading"><div><p class="section-kicker">XÁC THỰC TÀI KHOẢN</p><h3>${isVerified ? 'Cập nhật thông tin xác thực' : 'Xác thực người dùng'}</h3></div><span class="verification-mvp-note">MVP · lưu JSON</span></div>
+              <p class="field-hint">Nhập số điện thoại và căn cước công dân. MVP này không tích hợp OTP hoặc đối soát giấy tờ thật.</p>
+              <form id="verificationForm" class="verification-form">
+                <label>Số điện thoại<input name="phone" inputmode="numeric" maxlength="12" required placeholder="09xxxxxxxx" autocomplete="tel"></label>
+                <label>Căn cước công dân<input name="citizen_id" inputmode="numeric" maxlength="12" required placeholder="12 chữ số" autocomplete="off"></label>
+                <button class="btn primary" type="submit">${isVerified ? 'Cập nhật xác thực' : 'Xác thực tài khoản'}</button>
+              </form>
+              <div class="verification-note">Sau khi xác thực, các bài đăng của chủ trọ sẽ hiển thị huy hiệu <b>✓ Đã xác thực</b> cạnh tên người đăng.</div>
+            </section>
+          </div>`;
+        $('#verificationForm').addEventListener('submit', async (event) => {
+          event.preventDefault();
+          const button = event.currentTarget.querySelector('button[type="submit"]');
+          const data = Object.fromEntries(new FormData(event.currentTarget).entries());
+          button.disabled = true;
+          try {
+            const response = await API.post('/api/auth/verification', data);
+            user.verified = Boolean(response.data?.verified);
+            Session.current = { ...Session.current, verified: user.verified };
+            toast('Xác thực tài khoản thành công', 'success');
+            await render('profile');
+          } catch (error) {
+            toast(error.message || 'Không thể xác thực tài khoản', 'error');
+          } finally {
+            button.disabled = false;
+          }
+        });
         return;
       }
 

@@ -1,7 +1,7 @@
 {
   "districts": [
     {
-      "label": "Tất cả",
+      "label": "Tất cả quận",
       "value": ""
     },
     {
@@ -39,20 +39,24 @@
       "value": ""
     },
     {
-      "label": "3 triệu",
+      "label": "< 1 triệu",
+      "value": "1000000"
+    },
+    {
+      "label": "1–3 triệu",
       "value": "3000000"
     },
     {
-      "label": "4 triệu",
-      "value": "4000000"
-    },
-    {
-      "label": "5 triệu",
+      "label": "3–5 triệu",
       "value": "5000000"
     },
     {
-      "label": "7 triệu",
-      "value": "7000000"
+      "label": "5–10 triệu",
+      "value": "10000000"
+    },
+    {
+      "label": "> 10 triệu",
+      "value": "12000001"
     }
   ],
   "types": [
@@ -101,24 +105,24 @@
       "value": ""
     },
     {
-      "label": "Dưới 3 triệu",
+      "label": "< 1 triệu",
+      "value": "1000000"
+    },
+    {
+      "label": "1–3 triệu",
       "value": "3000000"
     },
     {
-      "label": "Dưới 4 triệu",
-      "value": "4000000"
-    },
-    {
-      "label": "Dưới 5 triệu",
+      "label": "3–5 triệu",
       "value": "5000000"
     },
     {
-      "label": "Dưới 7 triệu",
-      "value": "7000000"
+      "label": "5–10 triệu",
+      "value": "10000000"
     },
     {
-      "label": "Dưới 10 triệu",
-      "value": "10000000"
+      "label": "> 10 triệu",
+      "value": "12000001"
     }
   ],
   "map_areas": [
@@ -141,6 +145,348 @@
     {
       "label": "Từ 40m²",
       "value": "40"
+    }
+  ],
+  "wards": [
+    {
+      "label": "Tất cả phường/khu vực",
+      "value": ""
+    },
+    {
+      "label": "Bách Khoa",
+      "value": "Bách Khoa"
+    },
+    {
+      "label": "Bạch Mai",
+      "value": "Bạch Mai"
+    },
+    {
+      "label": "Bạch Đằng",
+      "value": "Bạch Đằng"
+    },
+    {
+      "label": "Cống Vị",
+      "value": "Cống Vị"
+    },
+    {
+      "label": "Dịch Vọng Hậu",
+      "value": "Dịch Vọng Hậu"
+    },
+    {
+      "label": "Láng Thượng",
+      "value": "Láng Thượng"
+    },
+    {
+      "label": "Lê Đại Hành",
+      "value": "Lê Đại Hành"
+    },
+    {
+      "label": "Mai Động",
+      "value": "Mai Động"
+    },
+    {
+      "label": "Minh Khai",
+      "value": "Minh Khai"
+    },
+    {
+      "label": "Mỹ Đình 2",
+      "value": "Mỹ Đình 2"
+    },
+    {
+      "label": "Quan Hoa",
+      "value": "Quan Hoa"
+    },
+    {
+      "label": "Quỳnh Lôi",
+      "value": "Quỳnh Lôi"
+    },
+    {
+      "label": "Quỳnh Mai",
+      "value": "Quỳnh Mai"
+    },
+    {
+      "label": "Thanh Lương",
+      "value": "Thanh Lương"
+    },
+    {
+      "label": "Thanh Nhàn",
+      "value": "Thanh Nhàn"
+    },
+    {
+      "label": "Thanh Xuân Trung",
+      "value": "Thanh Xuân Trung"
+    },
+    {
+      "label": "Trương Định",
+      "value": "Trương Định"
+    },
+    {
+      "label": "Tương Mai",
+      "value": "Tương Mai"
+    },
+    {
+      "label": "Tứ Liên",
+      "value": "Tứ Liên"
+    },
+    {
+      "label": "Vĩnh Tuy",
+      "value": "Vĩnh Tuy"
+    },
+    {
+      "label": "Đồng Tâm",
+      "value": "Đồng Tâm"
+    }
+  ],
+  "min_prices": [
+    {
+      "label": "Không giới hạn",
+      "value": ""
+    },
+    {
+      "label": "Từ 2 triệu",
+      "value": "2000000"
+    },
+    {
+      "label": "Từ 3 triệu",
+      "value": "3000000"
+    },
+    {
+      "label": "Từ 4 triệu",
+      "value": "4000000"
+    },
+    {
+      "label": "Từ 1 triệu",
+      "value": "1000000"
+    },
+    {
+      "label": "Từ 5 triệu",
+      "value": "5000000"
+    }
+  ],
+  "max_prices": [
+    {
+      "label": "Không giới hạn",
+      "value": ""
+    },
+    {
+      "label": "Dưới 2 triệu",
+      "value": "2000000"
+    },
+    {
+      "label": "Dưới 3 triệu",
+      "value": "3000000"
+    },
+    {
+      "label": "Dưới 4 triệu",
+      "value": "4000000"
+    },
+    {
+      "label": "Dưới 5 triệu",
+      "value": "5000000"
+    },
+    {
+      "label": "Dưới 7 triệu",
+      "value": "7000000"
+    },
+    {
+      "label": "Dưới 10 triệu",
+      "value": "10000000"
+    },
+    {
+      "label": "Dưới 1 triệu",
+      "value": "1000000"
+    },
+    {
+      "label": "Dưới 6 triệu",
+      "value": "6000000"
+    },
+    {
+      "label": "Dưới 12 triệu",
+      "value": "12000000"
+    }
+  ],
+  "max_areas": [
+    {
+      "label": "Không giới hạn",
+      "value": ""
+    },
+    {
+      "label": "Đến 20m²",
+      "value": "20"
+    },
+    {
+      "label": "Đến 30m²",
+      "value": "30"
+    },
+    {
+      "label": "Đến 40m²",
+      "value": "40"
+    },
+    {
+      "label": "Đến 60m²",
+      "value": "60"
+    }
+  ],
+  "furnishings": [
+    {
+      "label": "Tất cả nội thất",
+      "value": ""
+    },
+    {
+      "label": "Đầy đủ",
+      "value": "Đầy đủ"
+    },
+    {
+      "label": "Cơ bản",
+      "value": "Cơ bản"
+    },
+    {
+      "label": "Không nội thất",
+      "value": "Không nội thất"
+    }
+  ],
+  "genders": [
+    {
+      "label": "Tất cả đối tượng",
+      "value": ""
+    },
+    {
+      "label": "Tất cả",
+      "value": "Tất cả"
+    },
+    {
+      "label": "Nam",
+      "value": "Nam"
+    },
+    {
+      "label": "Nữ",
+      "value": "Nữ"
+    }
+  ],
+  "boolean_options": [
+    {
+      "label": "Không yêu cầu",
+      "value": ""
+    },
+    {
+      "label": "Có",
+      "value": "true"
+    }
+  ],
+  "amenities_options": [
+    {
+      "label": "Tất cả tiện ích",
+      "value": ""
+    },
+    {
+      "label": "Điều hòa",
+      "value": "Điều hòa"
+    },
+    {
+      "label": "Nóng lạnh",
+      "value": "Nóng lạnh"
+    },
+    {
+      "label": "Wi-Fi",
+      "value": "Wi-Fi"
+    },
+    {
+      "label": "Chỗ để xe",
+      "value": "Chỗ để xe"
+    },
+    {
+      "label": "Bếp riêng",
+      "value": "Bếp riêng"
+    },
+    {
+      "label": "Camera / an ninh",
+      "value": "camera"
+    }
+  ],
+  "sorts": [
+    {
+      "label": "Mới đăng trước",
+      "value": "newest"
+    },
+    {
+      "label": "Giá thấp đến cao",
+      "value": "price_asc"
+    },
+    {
+      "label": "Giá cao đến thấp",
+      "value": "price_desc"
+    },
+    {
+      "label": "Diện tích lớn đến nhỏ",
+      "value": "area_desc"
+    }
+  ],
+  "verification_status": [
+    {
+      "label": "Tất cả tin",
+      "value": ""
+    },
+    {
+      "label": "Tin đã xác thực",
+      "value": "true"
+    },
+    {
+      "label": "Tin chưa xác thực",
+      "value": "false"
+    }
+  ],
+  "fixed_locations": [
+    {
+      "id": "hust",
+      "label": "Đại học Bách khoa Hà Nội",
+      "short_label": "Bách Khoa",
+      "address": "Số 1 Đại Cồ Việt, phường Bạch Mai, Hà Nội",
+      "latitude": 21.0037,
+      "longitude": 105.8429,
+      "icon": "🎓",
+      "value": "hust"
+    },
+    {
+      "id": "neu",
+      "label": "Đại học Kinh tế Quốc dân",
+      "short_label": "Kinh tế Quốc dân",
+      "address": "207 Giải Phóng, phường Bạch Mai, Hà Nội",
+      "latitude": 20.9987,
+      "longitude": 105.8417,
+      "icon": "🎓",
+      "value": "neu"
+    },
+    {
+      "id": "huce",
+      "label": "Đại học Xây dựng Hà Nội",
+      "short_label": "Xây dựng",
+      "address": "55 Giải Phóng, phường Bạch Mai, Hà Nội",
+      "latitude": 20.997,
+      "longitude": 105.8418,
+      "icon": "🎓",
+      "value": "huce"
+    }
+  ],
+  "radius_options": [
+    {
+      "label": "500 m",
+      "value": "0.5"
+    },
+    {
+      "label": "1 km",
+      "value": "1"
+    },
+    {
+      "label": "2 km",
+      "value": "2"
+    },
+    {
+      "label": "3 km",
+      "value": "3"
+    },
+    {
+      "label": "5 km",
+      "value": "5"
     }
   ]
 }

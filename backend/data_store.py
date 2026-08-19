@@ -31,6 +31,14 @@ def _write(path, value):
     temp.replace(path)
 
 
+def load_verifications():
+    return _read(DATA_DIR / "verifications.json")
+
+
+def save_verifications(value):
+    _write(DATA_DIR / "verifications.json", value)
+
+
 def load_db():
     return {name: _read(path) for name, path in COLLECTION_FILES.items()}
 

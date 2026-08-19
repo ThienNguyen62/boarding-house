@@ -17,18 +17,52 @@
   },
   {
     "id": "U003",
-    "email": "landlord@tro.vn",
+    "email": "lethuha@tro.vn",
     "name": "Lê Thu Hà",
     "role": "landlord",
     "avatar": "assets/images/avatars/default-03.svg",
-    "password_hash": "e012861607c0a4447455eda18ee0c690d3517d31f7d6819e53d44b590a280c99"
+    "password_hash": "e012861607c0a4447455eda18ee0c690d3517d31f7d6819e53d44b590a280c99",
+    "landlord_profile_id": "L003",
+    "verified": false
   },
   {
     "id": "U004",
-    "email": "landlord2@tro.vn",
+    "email": "phamduclong@tro.vn",
     "name": "Phạm Đức Long",
     "role": "landlord",
     "avatar": "assets/images/avatars/default-04.svg",
-    "password_hash": "e012861607c0a4447455eda18ee0c690d3517d31f7d6819e53d44b590a280c99"
+    "password_hash": "e012861607c0a4447455eda18ee0c690d3517d31f7d6819e53d44b590a280c99",
+    "landlord_profile_id": "L004",
+    "verified": false
+  },
+  {
+    "id": "U005",
+    "email": "nguyenminhanh@tro.vn",
+    "name": "Nguyễn Minh Anh",
+    "role": "landlord",
+    "avatar": "https://i.pravatar.cc/150?img=47",
+    "password_hash": "e012861607c0a4447455eda18ee0c690d3517d31f7d6819e53d44b590a280c99",
+    "landlord_profile_id": "L001",
+    "verified": false
+  },
+  {
+    "id": "U006",
+    "email": "tranhoangnam@tro.vn",
+    "name": "Trần Hoàng Nam",
+    "role": "landlord",
+    "avatar": "https://i.pravatar.cc/150?img=12",
+    "password_hash": "e012861607c0a4447455eda18ee0c690d3517d31f7d6819e53d44b590a280c99",
+    "landlord_profile_id": "L002",
+    "verified": false
+  },
+  {
+    "id": "U007",
+    "email": "domailinh@tro.vn",
+    "name": "Đỗ Mai Linh",
+    "role": "landlord",
+    "avatar": "https://i.pravatar.cc/150?img=44",
+    "password_hash": "e012861607c0a4447455eda18ee0c690d3517d31f7d6819e53d44b590a280c99",
+    "landlord_profile_id": "L005",
+    "verified": false
   }
 ]

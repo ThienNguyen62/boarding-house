@@ -11,6 +11,7 @@ from routes.legacy_requests import bp as legacy_requests_bp
 from routes.comments import bp as comments_bp
 from routes.notifications import bp as notifications_bp
 from routes.uploads import bp as uploads_bp
+from routes.verification import bp as verification_bp
 from routes.pages import bp as pages_bp
 
 
@@ -35,5 +36,6 @@ def create_app():
     app.register_blueprint(comments_bp)
     app.register_blueprint(notifications_bp)
     app.register_blueprint(uploads_bp)
+    app.register_blueprint(verification_bp)
     app.register_blueprint(pages_bp)
     return app

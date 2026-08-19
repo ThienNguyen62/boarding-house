@@ -36,7 +36,7 @@ def register():
     if any(u.get("email", "").lower() == email for u in db.get("users", [])):
         return jsonify({"error": "EMAIL_EXISTS", "message": "Email đã tồn tại"}), 409
     uid = f"U{len(db.get('users', [])) + 1:03d}"
-    user = {"id": uid, "email": email, "name": name, "role": role, "avatar": "", "password_hash": hash_pw(password)}
+    user = {"id": uid, "email": email, "name": name, "role": role, "avatar": "", "password_hash": hash_pw(password), "verified": False}
     if role == "landlord":
         profile_ids = {str(x.get("id", "")) for x in db.get("landlords", [])}
         n = 1

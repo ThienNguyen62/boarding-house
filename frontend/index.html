@@ -10,12 +10,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" type="image/png" href="assets/images/trosmart-logo-phase11.png">
 </head>
 
 <body data-page="home">
-    <header class="nav"><a class="brand" href="index.html"><b>T</b>Trọ<span>Smart</span></a>
+    <header class="nav"><a class="brand" href="index.html"><img class="brand-logo" src="assets/images/trosmart-logo-phase11.png" alt="TrọSmart"></a>
         <div class="search"><i>⌕</i><input id="search" placeholder="Tìm theo quận, trường, tiện ích..."></div>
-        <nav><a href="pages/map.html">◉ Bản đồ</a><button id="saved">♡</button><button id="notice">♢<em></em></button><a
+        <nav><a href="pages/map.html">◉ Bản đồ</a><button id="saved">♡</button><div id="noticeWrap" class="notice-wrap"><button id="notice" class="notice-button notice-button-text" aria-label="Thông báo"><span class="notice-icon" aria-hidden="true">🔔</span><span>Thông báo</span><em></em></button><div id="noticeMenu" class="notice-menu" hidden></div></div><a
                 class="btn primary" href="pages/login.html">Đăng nhập</a></nav>
     </header>
     <section class="hero">
@@ -95,7 +96,15 @@
                     <h2>Tìm căn phòng phù hợp</h2>
                 </div><a href="pages/map.html">Xem bản đồ →</a>
             </div>
-            <div class="filters"><label>Khu vực<select id="district"><option value="">Tất cả</option></select></label><label>Giá tối đa<select id="price"><option value="">Không giới hạn</option></select></label><label>Loại phòng<select id="type"><option value="">Tất cả</option></select></label><label>Diện tích<select id="area"><option value="">Tất cả</option></select></label><button id="reset">Đặt lại</button></div>
+            <div class="compact-filter-bar" id="compactFilterBar">
+                <button type="button" class="compact-filter-btn filter-main" id="advancedFilterButton">Lọc</button>
+                <label class="compact-verified-toggle"><span class="verified-filter-icon">✓</span><span>Tin xác thực</span><input id="filterVerified" type="checkbox"><span class="toggle-ui"></span></label>
+                <select id="filterDistrict" class="compact-filter-select" aria-label="Quận"><option value="">Tất cả quận</option></select>
+                <select id="filterWard" class="compact-filter-select" aria-label="Phường/khu vực"><option value="">Tất cả phường/khu vực</option></select>
+                <button type="button" id="filterPriceRange" class="compact-filter-price" aria-label="Khoảng giá"><span>Khoảng giá</span><b>⌄</b></button>
+                        <button type="button" id="filterNearby" class="compact-filter-nearby" aria-label="Tìm kiếm quanh bạn"><span class="nearby-filter-icon">⌖</span><span>Tìm kiếm quanh bạn</span><b>⌄</b></button>
+                <button type="button" class="compact-reset-btn" id="compactFilterReset">Đặt lại</button>
+            </div>
             <div class="meta"><span id="count">10 phòng</span><span>✓ Ưu tiên tin đã xác thực</span></div>
             <div class="grid" id="rooms"></div><div class="load-more-wrap" id="loadMoreWrap" hidden><button class="btn outline load-more" id="loadMore">Xem thêm phòng →</button></div>
         </section>
@@ -125,7 +134,7 @@
         </section>
     </main>
     <footer>
-        <div><a class="brand" href="index.html"><b>T</b>Trọ<span>Smart</span></a>
+        <div><a class="brand" href="index.html"><img class="brand-logo" src="assets/images/trosmart-logo-phase11.png" alt="TrọSmart"></a>
             <p>Tìm trọ minh bạch. Sống đúng nơi.</p>
         </div>
         <div><strong>Sản phẩm</strong><a href="#listings">Tìm phòng</a><a href="pages/map.html">Bản đồ</a></div>
